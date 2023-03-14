@@ -25,7 +25,7 @@ while [[ $# -gt 0 ]]; do
             shift 2
             ;;
         -h|--help)
-            echo "Usage: source $0 [-g|--gitlab-url GITLAB_URL] [-i|--project-id GITLAB_PROJECT_ID] [-u|--tf-username TF_USERNAME] [-p|--tf-password TF_PASSWORD] [-s|--tf-state-name TF_STATE_NAME]"
+            echo "Usage: source $0 [-g|--gitlab-url GITLAB_URL] [-i|--project-id GITLAB_PROJECT_ID] [-s|--tf-state-name TF_STATE_NAME] [-u|--tf-username TF_USERNAME] [-p|--tf-password TF_PASSWORD]"
             break
             ;;
         *)
