@@ -24,4 +24,4 @@ The following environment variables have to be set before calling the script
 
    the name of the terraform state
 
-These variables can be set by the script `prepare_env`, print usage with `prepare_env -h`.
+These variables can be set by the script `prepare_env_for_set_env_vars_for_gitlab_terraform_state_access`, print usage with `prepare_env_for_set_env_vars_for_gitlab_terraform_state_access -h`.
