@@ -12,7 +12,6 @@ set_env() {
     _ENV_COMPLETE="yes"
     check_env_complete
 
-    echo ${_ENV_COMPLETE}
     if [[ ${_ENV_COMPLETE} == "yes" ]]; then
         GITLAB_API_V4_URL="${GITLAB_URL}/api/v4"
 
