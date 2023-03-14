@@ -1,17 +1,18 @@
 #!/bin/bash
 
 unset_env() {
-    for ENV_VARIABLE in GITLAB_URL GITLAB_PROJECT_ID TF_USERNAME TF_PASSWORD TF_HTTP_ADDRESS TF_HTTP_LOCK_ADDRESS TF_HTTP_LOCK_METHOD TF_HTTP_UNLOCK_ADDRESS TF_HTTP_UNLOCK_METHOD TF_HTTP_USERNAME TF_HTTP_PASSWORD TF_HTTP_RETRY_WAIT_MIN; do
-        echo unset $ENV_VARIABLE
-        unset ${ENV_VARIABLE}
+    for _ENV_VARIABLE in GITLAB_URL GITLAB_PROJECT_ID TF_USERNAME TF_PASSWORD TF_HTTP_ADDRESS TF_HTTP_LOCK_ADDRESS TF_HTTP_LOCK_METHOD TF_HTTP_UNLOCK_ADDRESS TF_HTTP_UNLOCK_METHOD TF_HTTP_USERNAME TF_HTTP_PASSWORD TF_HTTP_RETRY_WAIT_MIN; do
+        echo unset $_ENV_VARIABLE
+        unset ${_ENV_VARIABLE}
     done
+    unset _ENV_VARIABLE
 }
 
 set_env() {
-    ENV_COMPLETE="yes"
+    _ENV_COMPLETE="yes"
     check_env_complete
 
-    if [[ ${ENV_COMPLETE} == "yes" ]]; then
+    if [[ ${_ENV_COMPLETE} == "yes" ]]; then
         GITLAB_API_V4_URL="${GITLAB_URL}/api/v4"
 
         export TF_HTTP_ADDRESS="${GITLAB_API_V4_URL}/projects/${GITLAB_PROJECT_ID}/terraform/state/${TF_STATE_NAME}"
@@ -23,37 +24,38 @@ set_env() {
         export TF_HTTP_PASSWORD="${TF_PASSWORD}"
         export TF_HTTP_RETRY_WAIT_MIN="5"
     fi
+    unset _ENV_COMPLETE
 }
 
 check_env_complete() {
     if [[ -z "${GITLAB_URL}" ]]; then
         echo "Error: GITLAB_URL environment variable is not set"
-        ENV_COMPLETE="no"
+        _ENV_COMPLETE="no"
     fi
     if [[ -z "${GITLAB_PROJECT_ID}" ]]; then
         echo "Error: GITLAB_PROJECT_ID environment variable is not set"
-        ENV_COMPLETE="no"
+        _ENV_COMPLETE="no"
     fi
     if [[ -z "${TF_STATE_NAME}" ]]; then
         echo "Error: TF_STATE_NAME environment variable is not set"
-        ENV_COMPLETE="no"
+        _ENV_COMPLETE="no"
     fi
     if [[ -z "${TF_USERNAME}" ]]; then
         echo "Error: TF_USERNAME environment variable is not set"
-        ENV_COMPLETE="no"
+        _ENV_COMPLETE="no"
     fi
     if [[ -z "${TF_PASSWORD}" ]]; then
         echo "Error: TF_PASSWORD environment variable is not set"
-        ENV_COMPLETE="no"
+        _ENV_COMPLETE="no"
     fi
-    ENV_COMPLETE="yes"
+    _ENV_COMPLETE="yes"
 }
 
-UNSET="no"
+_UNSET="no"
 while [[ $# -gt 0 ]]; do
     case "$1" in
         -u|--unset)
-            UNSET="yes"
+            _UNSET="yes"
             shift 1
             ;;
         -h|--help)
@@ -67,8 +69,9 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-if [[ "${UNSET}" == "yes" ]]; then
+if [[ "${_UNSET}" == "yes" ]]; then
     unset_env
 else
     set_env
 fi
+unset _UNSET
