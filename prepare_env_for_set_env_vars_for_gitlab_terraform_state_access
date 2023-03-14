@@ -26,11 +26,11 @@ while [[ $# -gt 0 ]]; do
             ;;
         -h|--help)
             echo "Usage: source $0 [-g|--gitlab-url GITLAB_URL] [-i|--project-id GITLAB_PROJECT_ID] [-u|--tf-username TF_USERNAME] [-p|--tf-password TF_PASSWORD] [-s|--tf-state-name TF_STATE_NAME]"
-            exit 0
+            break
             ;;
         *)
             echo "Error: Unknown parameter: $1"
-            exit 1
+            break
             ;;
     esac
 done
