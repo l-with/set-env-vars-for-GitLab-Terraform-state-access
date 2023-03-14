@@ -13,7 +13,6 @@ while [[ $# -gt 0 ]]; do
             ;;
         -u|--tf-username)
             echo export TF_USERNAME="$2"
-            export TF_USERNAME="$2"
             shift 2
             ;;
         -p|--tf-password)
