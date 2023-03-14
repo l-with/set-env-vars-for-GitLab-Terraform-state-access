@@ -1,7 +1,7 @@
 #!/bin/bash
 
 unset_env() {
-    for _ENV_VARIABLE in GITLAB_URL GITLAB_PROJECT_ID TF_USERNAME TF_PASSWORD TF_HTTP_ADDRESS TF_HTTP_LOCK_ADDRESS TF_HTTP_LOCK_METHOD TF_HTTP_UNLOCK_ADDRESS TF_HTTP_UNLOCK_METHOD TF_HTTP_USERNAME TF_HTTP_PASSWORD TF_HTTP_RETRY_WAIT_MIN; do
+    for _ENV_VARIABLE in GITLAB_URL GITLAB_PROJECT_ID TF_USERNAME TF_PASSWORD TF_STATE_NAME TF_HTTP_ADDRESS TF_HTTP_LOCK_ADDRESS TF_HTTP_LOCK_METHOD TF_HTTP_UNLOCK_ADDRESS TF_HTTP_UNLOCK_METHOD TF_HTTP_USERNAME TF_HTTP_PASSWORD TF_HTTP_RETRY_WAIT_MIN; do
         echo unset $_ENV_VARIABLE
         unset ${_ENV_VARIABLE}
     done
@@ -12,6 +12,7 @@ set_env() {
     _ENV_COMPLETE="yes"
     check_env_complete
 
+    echo ${_ENV_COMPLETE}
     if [[ ${_ENV_COMPLETE} == "yes" ]]; then
         GITLAB_API_V4_URL="${GITLAB_URL}/api/v4"
 
@@ -28,6 +29,7 @@ set_env() {
 }
 
 check_env_complete() {
+    _ENV_COMPLETE="yes"
     if [[ -z "${GITLAB_URL}" ]]; then
         echo "Error: GITLAB_URL environment variable is not set"
         _ENV_COMPLETE="no"
@@ -48,7 +50,6 @@ check_env_complete() {
         echo "Error: TF_PASSWORD environment variable is not set"
         _ENV_COMPLETE="no"
     fi
-    _ENV_COMPLETE="yes"
 }
 
 _UNSET="no"
