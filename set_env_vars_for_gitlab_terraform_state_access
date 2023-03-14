@@ -49,6 +49,7 @@ check_env_complete() {
     ENV_COMPLETE="yes"
 }
 
+UNSET="no"
 while [[ $# -gt 0 ]]; do
     case "$1" in
         -u|--unset)
@@ -66,7 +67,6 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-echo $UNSET
 if [[ "${UNSET}" == "yes" ]]; then
     unset_env
 else
