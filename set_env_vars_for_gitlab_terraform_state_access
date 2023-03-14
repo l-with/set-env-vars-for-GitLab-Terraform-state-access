@@ -52,6 +52,7 @@ check_env_complete() {
 }
 
 _UNSET="no"
+_DO="yes"
 while [[ $# -gt 0 ]]; do
     case "$1" in
         -u|--unset)
@@ -60,18 +61,24 @@ while [[ $# -gt 0 ]]; do
             ;;
         -h|--help)
             echo "Usage: source $0 [-u|--unset]"
+            _DO="no"
             break
             ;;
         *)
             echo "Error: Unknown parameter: $1"
+            _DO="no"
             break
             ;;
     esac
 done
 
-if [[ "${_UNSET}" == "yes" ]]; then
-    unset_env
-else
-    set_env
+
+if [[ "${_DO}" == "yes" ]]; then
+    if [[ "${_UNSET}" == "yes" ]]; then
+        unset_env
+    else
+        set_env
+    fi
 fi
 unset _UNSET
+unset _DO
