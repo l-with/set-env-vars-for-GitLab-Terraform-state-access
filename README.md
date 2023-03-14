@@ -1,8 +1,6 @@
 # set env vars for gitlab terraform state access
 
-script to set environment variables for accessing GitLab Terraform state
-
-usage: `source set_env_vars_for_gitlab_terraform_state_access`
+script to set environment variables for accessing GitLab Terraform state, print usage with `set_env_vars_for_gitlab_terraform_state_access -h`
 
 The following environment variables have to be set before calling the script
 
@@ -26,4 +24,4 @@ The following environment variables have to be set before calling the script
 
    the name of the terraform state
 
-These variables can be set by the script set_env
+These variables can be set by the script `prepare_env`, print usage with `prepare_env -h`.
